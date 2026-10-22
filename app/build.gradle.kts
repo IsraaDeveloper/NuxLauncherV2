@@ -72,6 +72,13 @@ android {
         manifestPlaceholders["launcher_name"] = launcherAPPName
     }
 
+    lint {
+        // Lint's JavaDoc parser crashes on this AGP + Kotlin combination
+        // (NoSuchMethodError in JavaDocParser), which aborts release builds.
+        // Run ./gradlew :app:lint by hand instead.
+        checkReleaseBuilds = false
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
